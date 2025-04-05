@@ -1,0 +1,306 @@
+/* CharacterDetails.css - fixad för att undvika dubbla stängknappar */
+
+/* Huvudkontainern för karaktärsdetaljer */
+.character-details {
+position: relative;
+background-color: rgba(15, 23, 42, 0.8);
+border-radius: 12px;
+max-width: 500px;
+max-height: 90vh;
+width: 90%;
+color: white;
+overflow-y: auto;
+display: flex;
+flex-direction: column;
+}
+
+/* Bakgrundseffekten med blur */
+.details-background {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-size: cover;
+background-position: center;
+filter: blur(75px);
+opacity: 0.9;
+z-index: 0;
+}
+
+/* Stängknapp - viktigt: inga pseudoelement som ::before eller ::after här */
+.close-button {
+background: rgba(255, 255, 255, 0.2);
+border: none;
+color: white;
+border-radius: 50%;
+width: 32px;
+height: 32px;
+font-size: 1.5rem;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+padding: 0;
+line-height: 1;
+z-index: 10;
+position: absolute;
+top: 12px;
+right: 12px;
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.close-button:hover {
+background: rgba(255, 255, 255, 0.4);
+}
+
+/* Karaktärsbilden som visas överst */
+.details-top-section {
+width: 100%;
+display: flex;
+justify-content: center;
+margin: 0;
+padding: 20px 0 0 0;
+position: relative; /* Viktigt för att hantera innehåll */
+z-index: 1; /* Se till att det ligger över bakgrunden */
+}
+
+/* Förhindra att poster-bilden får en extra stängknapp */
+.details-poster {
+width: 80%;
+max-height: 450px;
+margin: 0 auto;
+border-radius: 12px;
+overflow: hidden;
+opacity: 1; 
+z-index: 2;
+position: relative;
+}
+
+/* Viktigt: Se till att bilden inte genererar pseudoelement */
+.details-poster::before,
+.details-poster::after {
+display: none !important;
+}
+
+.details-poster img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+
+/* Förhindra pseudoelement på bilden */
+.details-poster img::before,
+.details-poster img::after {
+display: none !important;
+}
+
+.no-poster {
+height: 100%;
+display: flex;
+align-items: center;
+justify-content: center;
+background-color: #eee;
+color: #333;
+}
+
+/* Titel under bilden */
+.details-header {
+position: relative;
+z-index: 2;
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 1.5rem 1rem 1rem 1rem;
+background: none;
+border-bottom: none;
+width: 100%;
+box-sizing: border-box;
+}
+
+.details-header h2 {
+margin: 0 0 0.5rem 0;
+font-size: 2rem;
+font-weight: 700;
+line-height: 1.2;
+text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+max-width: 100%;
+box-sizing: border-box;
+word-wrap: break-word;
+hyphens: auto;
+}
+
+.character-meta {
+display: flex;
+align-items: center;
+flex-wrap: wrap;
+gap: 1rem;
+margin-bottom: 0.75rem;
+color: rgba(255, 255, 255, 0.9);
+}
+
+.character-real-name {
+font-size: 1rem;
+font-style: italic;
+}
+
+/* Horisontell linje mellan sektioner */
+.section-divider {
+height: 1px;
+background-color: rgba(255, 255, 255, 0.3);
+margin-bottom: 1rem;
+margin-top: 0.8rem;
+}
+
+/* Sektionstitlar */
+.section-title {
+font-size: 1.25rem;
+margin: 0 0 0.75rem 0;
+padding-bottom: 0.5rem;
+color: rgba(255, 255, 255, 0.9);
+font-weight: 600;
+}
+
+/* Om karaktären-sektion */
+.about-character-section {
+margin: 0 0 1rem 0;
+padding: 0 1rem;
+position: relative;
+z-index: 1;
+}
+
+.about-character-section p {
+line-height: 1.5;
+font-size: 0.95rem;
+margin-top: 0.5rem;
+}
+
+/* Filmsektion */
+.movies-section {
+margin: 0 0 1rem 0;
+padding: 0 1rem;
+position: relative;
+z-index: 1;
+}
+
+.movies-list {
+list-style: none;
+padding: 0;
+margin: 0;
+}
+
+.movie-item {
+background-color: rgba(255, 255, 255, 0.1);
+padding: 0.5rem 0.75rem;
+border-radius: 4px;
+margin-bottom: 0.5rem;
+}
+
+/* Footer */
+.details-footer {
+padding: 1rem;
+text-align: center;
+font-size: 0.8rem;
+color: rgba(255, 255, 255, 0.6);
+margin-top: auto;
+}
+
+/* Responsiv design för små skärmar */
+@media (max-width: 640px) {
+.character-details {
+    max-width: 95%;
+}
+
+.details-poster {
+    width: 90%;
+}
+
+.details-header h2 {
+    font-size: 1.5rem;
+}
+
+.character-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+}
+
+
+/* Filmsektion i CharacterDetails.css - lägg till följande i din befintliga CSS-fil */
+
+/* Filmsektionen */
+.movies-section {
+    margin: 0 0 1.5rem 0;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Grid för filmposter */
+  .character-movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  /* Filmkort */
+  .character-movie-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Container för filmpostern */
+  .movie-poster-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 150%; /* Ger ett 2:3 förhållande för filmpostern */
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .character-movie-card:hover .movie-poster-container {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  }
+  
+  /* Filmposterbild */
+  .movie-poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Filmtitel */
+  .character-movie-card .movie-title {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: normal;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: white;
+  }
+  
+  /* Responsiv anpassning för filmer */
+  @media (max-width: 640px) {
+    .character-movies-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+    }
+    
+    .character-movie-card .movie-title {
+      font-size: 0.8rem;
+    }
+  }

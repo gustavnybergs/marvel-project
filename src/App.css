@@ -1,0 +1,156 @@
+/* ========== GLOBALA VARIABLER ========== */
+:root {
+  --primary-color: #e23636; /* Min huvudsakliga Marvel-röda färg för akcenter */
+  --secondary-color: #518cca; /* Sekundär blå färg för detaljer och hover-effekter */
+}
+
+/* ========== MODAL OCH BODY-HANTERING ========== */
+/* Förhindrar scrollning när en modal är öppen */
+body.modal-open {
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* ========== BAKGRUND OCH GRUNDLÄGGANDE STYLING ========== */
+body {
+  min-height: 100vh;
+  padding-top: 70px; 
+  /* Gradient-bakgrund som ger djup och Marvel-känsla */
+  background: linear-gradient(193deg, #0D3A70 -1.67%, #0B315F 16.78%, #061E3B 62.91%, #071E3A 101.6%);
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* Fixerar bakgrunden under scrollning */
+  transition: background 1s ease-in-out; /* Mjuk övergång mellan bakgrundstillstånd */
+}
+
+/* ========== LADDNINGSANIMATIONER ========== */
+/* Ghost card för att indikera laddning av innehåll */
+.ghost-card {
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  animation: pulse 1.2s ease-in-out infinite; /* Skapar en "andnings"-effekt */
+}
+
+/* Pulseringsanimation för laddningsindikator */
+@keyframes pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.5; }
+}
+
+/* Fade-in animation för bakgrund */
+@keyframes fadeInBackground {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========== RESET OCH GRUNDLÄGGANDE LAYOUT ========== */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Containern för hela applikationen */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ========== HEADER-STYLING ========== */
+.main-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(180deg, rgba(11, 15, 52, 0.00) 13.36%, rgba(10, 19, 54, 0.26) 34.36%, rgba(9, 24, 56, 0.58) 50.36%, rgba(8, 27, 58, 0.82) 76.86%, #071E3B 100%), url(/headerbild.svg) lightgray 50% / cover no-repeat;
+  background-size: cover;
+  background-position: top;
+  padding: 4rem 2rem;
+  min-height: 30rem;
+  justify-content: center;
+}
+
+/* Header-innehållets layout */
+.main-header-content {
+  position: relative;
+  padding: 285px 336px 99px 336px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling för räknare och textdetaljer */
+.movies-count {
+  color: white;
+  opacity: 0.7;
+  font-family: 'Inter', sans-serif; /* Samma font som andra knappar */
+}
+
+.big-span {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white; 
+  text-transform: uppercase;
+}
+
+.text {
+  color: white;
+  max-width: 80%;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ========== STATUS-INDIKATORER ========== */
+.loading, .error { 
+  text-align: center; 
+  padding: 2rem 0; 
+}
+
+.error { 
+  color: #c62828; 
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}
+
+/* ========== TILLGÄNGLIGHETSKLASSER ========== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* ========== RESPONSIV DESIGN ========== */
+@media (max-width: 600px) {
+  .movie-grid { 
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+  }
+
+  .main-header {
+    height: 250px;
+  }
+
+  .text {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    height: 40vh;
+  }
+
+  .text {
+    font-size: 1rem;
+  }
+}
