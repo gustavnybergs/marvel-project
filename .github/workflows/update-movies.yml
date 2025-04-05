@@ -3,7 +3,7 @@ name: Update Marvel Movies Weekly
 on:
   schedule:
     - cron: "0 7 * * 1" # Varje måndag kl. 07:00 UTC
-  workflow_dispatch: # Gör så att vi även kan starta manuellt från GitHub
+  workflow_dispatch: # Möjliggör manuell körning från GitHub
 
 jobs:
   update-movies:
@@ -21,8 +21,11 @@ jobs:
       - name: 📦 Installera dependencies
         run: npm ci
 
+      - name: ➕ Installera tsx
+        run: npm install --save-dev tsx
+
       - name: 🛠️ Kör scriptet som uppdaterar filmer
-        run: npx ts-node src/utils/fetchAndSaveMoviesToJson.ts
+        run: npx tsx src/utils/fetchAndSaveMoviesToJson.ts
 
       - name: 🔼 Lägg till, committa & pusha
         run: |
