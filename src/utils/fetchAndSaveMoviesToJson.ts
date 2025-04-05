@@ -129,13 +129,11 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
   }
 }
 
-// Kör funktionen direkt när scriptet körs
-if (require.main === module) {
-  fetchAndSaveMoviesToJson().then(() => {
-    console.log("Script avslutat.");
-    process.exit(0); // Avsluta skriptet när allt är klart
-  }).catch((error) => {
-    console.error("Fel vid körning av skriptet:", error);
-    process.exit(1); // Avsluta med felkod
-  });
-}
+ // Kör alltid när filen körs direkt eller från tsx/Node ESM
+fetchAndSaveMoviesToJson().then(() => {
+  console.log("Script avslutat.");
+  process.exit(0);
+}).catch((error) => {
+  console.error("Fel vid körning av skriptet:", error);
+  process.exit(1);
+});
