@@ -113,7 +113,6 @@ export async function fetchAndSaveMoviesToJson(): Promise<void> {
     const jsonFilePath = path.join(publicDirPath, 'marvelmovies.json');
     
     // Skapa en version av objektet som kan serialiseras till JSON
-    // (funktioner kan inte direkt serialiseras i JSON)
     const serializableMovies = enrichedMovies.map(movie => {
       const { calculateAverageRating, ...movieWithoutFunction } = movie;
       return movieWithoutFunction;
