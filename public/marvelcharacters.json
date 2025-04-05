@@ -60,7 +60,7 @@
     "name": "Drax the Destroyer",
     "real_name": "Arthur Douglas",
     "description": "Iron Man #55 (February, 1973)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10016.jpg",
+    "image_url": "/images/drax.png",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
   {
@@ -68,7 +68,7 @@
     "name": "Falcon",
     "real_name": "Sam Wilson",
     "description": "Captain America #117 (September, 1969)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/56.jpg",
+    "image_url": "/images/falcon.png",
     "movies": ["Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Ant-Man", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame", "The Falcon and the Winter Soldier (TV Series)"]
   },
   {
@@ -76,7 +76,7 @@
     "name": "Gamora",
     "real_name": "Gamora Zen Whoberi Ben Titan",
     "description": "Strange Tales #180 (June, 1975)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/65.jpg",
+    "image_url": "/images/gamora.jpg",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
   {
@@ -84,7 +84,7 @@
     "name": "Groot",
     "real_name": "Groot",
     "description": "Tales to Astonish #13 (November, 1960)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10017.jpg",
+    "image_url": "/images/groot.jpg",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3", "I Am Groot (TV Series)"]
   },
   {
@@ -92,7 +92,7 @@
     "name": "Hela",
     "real_name": "Hela",
     "description": "Journey into Mystery #102",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10835.jpg",
+    "image_url": "/images/hela.jpg",
     "movies": ["Thor: Ragnarok"]
   },
   {
@@ -124,7 +124,7 @@
     "name": "Mantis",
     "real_name": "Mantis",
     "description": "Avengers #112",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/384.jpg",
+    "image_url": "/images/mantis.png",
     "movies": ["Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
   {
@@ -132,7 +132,7 @@
     "name": "Mysterio",
     "real_name": "Quentin Beck",
     "description": "Amazing Spider-Man #13 (1964)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/1039.jpg",
+    "image_url": "/images/mysterio.png",
     "movies": ["Spider-Man: Far From Home"]
   },
   {
@@ -140,7 +140,7 @@
     "name": "Nebula",
     "real_name": "Nebula",
     "description": "Avengers #257 (July, 1985)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10632.jpg",
+    "image_url": "/images/nebula.png",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
   {
@@ -156,7 +156,7 @@
     "name": "Odin",
     "real_name": "Odin Borson",
     "description": "Journey into Mystery #85",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10388.jpg",
+    "image_url": "/images/odin.jpg",
     "movies": ["Thor", "Thor: The Dark World", "Thor: Ragnarok"]
   },
   {
@@ -164,7 +164,7 @@
     "name": "Professor X",
     "real_name": "Charles Xavier",
     "description": "X-Men #1 (September, 1963)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/113.jpg",
+    "image_url": "/images/professor-x.png",
     "movies": ["Doctor Strange in the Multiverse of Madness (Earth-838 variant)"]
   },
   {
@@ -172,7 +172,7 @@
     "name": "Rocket Raccoon",
     "real_name": "Rocket Raccoon",
     "description": "Marvel Preview #7 (June, 1976)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10010.jpg",
+    "image_url": "/images/rocket.jpg",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
   {
@@ -180,7 +180,7 @@
     "name": "Shang-Chi",
     "real_name": "Shang-Chi",
     "description": "Special Marvel Edition #15 (December, 1973)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/454.jpg",
+    "image_url": "/images/shang-chi.png",
     "movies": ["Shang-Chi and the Legend of the Ten Rings"]
   },
   
@@ -189,7 +189,7 @@
     "name": "Spider-Man",
     "real_name": "Peter Parker",
     "description": "Amazing Fantasy #15",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/133.jpg",
+    "image_url": "/images/spider-man.png",
     "movies": ["Captain America: Civil War", "Spider-Man: Homecoming", "Avengers: Infinity War", "Avengers: Endgame", "Spider-Man: Far From Home", "Spider-Man: No Way Home"]
   },
   {
@@ -197,7 +197,7 @@
     "name": "Star-Lord",
     "real_name": "Peter Quill",
     "description": "Marvel Preview #4 (January, 1976)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10015.jpg",
+    "image_url": "/images/star-lord.png",
     "movies": ["Guardians of the Galaxy", "Guardians of the Galaxy Vol. 2", "Avengers: Infinity War", "Avengers: Endgame", "Thor: Love and Thunder", "Guardians of the Galaxy Vol. 3"]
   },
   {
@@ -205,7 +205,7 @@
     "name": "Thanos",
     "real_name": "Thanos",
     "description": "Iron Man #55",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/1305.jpg",
+    "image_url": "/images/thanos.png",
     "movies": ["The Avengers (mid-credits)", "Guardians of the Galaxy", "Avengers: Age of Ultron (mid-credits)", "Avengers: Infinity War", "Avengers: Endgame"]
   },
   {
@@ -221,7 +221,7 @@
     "name": "War Machine",
     "real_name": "James Rhodes",
     "description": "Iron Man #118 (1979)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/536.jpg",
+    "image_url": "/images/war-machine.png",
     "movies": ["Iron Man", "Iron Man 2", "Iron Man 3", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame"]
   },
   {
@@ -229,7 +229,7 @@
     "name": "Wasp",
     "real_name": "Hope van Dyne",
     "description": "Tales to Astonish #44",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/155.jpg",
+    "image_url": "/images/wasp.png",
     "movies": ["Ant-Man", "Ant-Man and the Wasp", "Avengers: Endgame", "Ant-Man and the Wasp: Quantumania"]
   },
   {
@@ -237,7 +237,7 @@
     "name": "Winter Soldier",
     "real_name": "Bucky Barnes",
     "description": "Captain America Vol 5 #1 (January, 2005) (as Winter Soldier)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10027.jpg",
+    "image_url": "/images/winter-soldier.png",
     "movies": ["Captain America: The First Avenger", "Captain America: The Winter Soldier", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame", "The Falcon and the Winter Soldier (TV Series)"]
   },
   {
@@ -245,7 +245,7 @@
     "name": "Wolverine",
     "real_name": "Logan",
     "description": "Incredible Hulk Vol. 2 #180",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/161.jpg",
+    "image_url": "/images/wolverine.png",
     "movies": ["Deadpool & Wolverine"]
   },
   {
@@ -253,7 +253,7 @@
     "name": "Ultron",
     "real_name": "Ultron",
     "description": "Avengers #54 (July, 1968)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/1339.jpg",
+    "image_url": "/images/ultron.png",
     "movies": ["Avengers: Age of Ultron"]
   },
   {
@@ -294,7 +294,7 @@
     "name": "Shuri",
     "real_name": "Shuri",
     "description": "Black Panther Vol. 4 #2 (May, 2005)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/12191.jpg",
+    "image_url": "/images/shuri.jpg",
     "movies": ["Black Panther", "Avengers: Infinity War", "Avengers: Endgame", "Black Panther: Wakanda Forever"]
   },
   {
@@ -302,7 +302,7 @@
     "name": "M'Baku",
     "real_name": "M'Baku",
     "description": "Avengers #62 (March, 1969)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10478.jpg",
+    "image_url": "/images/mbaku.png",
     "movies": ["Black Panther", "Avengers: Infinity War", "Avengers: Endgame", "Black Panther: Wakanda Forever"]
   },
   {
@@ -310,7 +310,7 @@
     "name": "Killmonger",
     "real_name": "Erik Stevens",
     "description": "Jungle Action #6 (September, 1973)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10396.jpg",
+    "image_url": "/images/killmonger.png",
     "movies": ["Black Panther", "What If...? (TV Series)"]
   },
   {
@@ -318,7 +318,7 @@
     "name": "Deadpool",
     "real_name": "Wade Wilson",
     "description": "New Mutants #98 (February, 1991)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/835.jpg",
+    "image_url": "/images/deadpool.png",
     "movies": ["Deadpool & Wolverine"]
   },
   {
@@ -326,7 +326,7 @@
     "name": "Captain Carter",
     "real_name": "Peggy Carter", 
     "description": "What If...? (TV Series)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/13050.jpg",
+    "image_url": "/images/peggy-carter.png",
     "movies": ["What If...? (TV Series)", "Doctor Strange in the Multiverse of Madness"]
   },
 
@@ -335,7 +335,7 @@
     "name": "Valkyrie",
     "real_name": "Brunnhilde",
     "description": "Avengers #87 (April, 1971)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/147.jpg",
+    "image_url": "/images/valkyrie.jpg",
     "movies": ["Thor: Ragnarok", "Avengers: Endgame", "Thor: Love and Thunder"]
   },
   {
@@ -343,7 +343,7 @@
     "name": "Heimdall",
     "real_name": "Heimdall",
     "description": "Journey into Mystery #85 (October, 1962)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10059.jpg",
+    "image_url": "/images/heimdall.png",
     "movies": ["Thor", "Thor: The Dark World", "Avengers: Age of Ultron", "Thor: Ragnarok", "Avengers: Infinity War", "Thor: Love and Thunder"]
   },
   {
@@ -351,7 +351,7 @@
     "name": "Ikaris",
     "real_name": "Ikaris",
     "description": "Eternals #1 (July, 1976)",
-    "image_url": "https://www.superherodb.com/pictures2/portraits/10/100/10449.jpg",
+    "image_url": "/images/ikaris.png",
     "movies": ["Eternals"]
   }
 ]
