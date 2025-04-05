@@ -1,0 +1,33 @@
+name: Update Marvel Movies Weekly
+
+on:
+  schedule:
+    - cron: "0 7 * * 1" # Varje måndag kl. 07:00 UTC
+  workflow_dispatch: # Gör så att vi även kan starta manuellt från GitHub
+
+jobs:
+  update-movies:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Klona repo
+        uses: actions/checkout@v3
+
+      - name: 🟦 Installera Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 📦 Installera dependencies
+        run: npm ci
+
+      - name: 🛠️ Kör scriptet som uppdaterar filmer
+        run: npx ts-node src/utils/fetchAndSaveMoviesToJson.ts
+
+      - name: 🔼 Lägg till, committa & pusha
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add public/marvelmovies.json
+          git commit -m "🤖 Uppdaterade marvelmovies.json automatiskt"
+          git push origin HEAD
