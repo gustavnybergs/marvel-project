@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "save-characters": "npx ts-node --project backend/tsconfig.json src/utils/saveMarvelCharacters.ts",
-    "fetch-movies": "npx ts-node --project backend/tsconfig.json src/utils/fetchAndSaveMoviesToJson.ts",
+    "save-characters": "npx ts-node src/utils/saveMarvelCharacters.ts",
+    "fetch-movies": "npx ts-node src/utils/fetchAndSaveMoviesToJson.ts",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
@@ -17,6 +17,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "framer-motion": "^12.6.3",
+    "fs-extra": "^11.3.0",
     "node-fetch": "^3.3.2",
     "pg": "^8.14.1",
     "react": "^19.0.0",
@@ -29,6 +30,7 @@
     "@types/cors": "^2.8.17",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.1",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.13.13",
     "@types/node-fetch": "^2.6.12",
     "@types/pg": "^8.11.11",
