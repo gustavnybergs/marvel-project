@@ -80,6 +80,19 @@ html, body {
   align-items: center;
 }
 
+.characters-hero, .main-header {
+  width: 100%; /* Full bredd */
+  max-width: 1440px; /* Maxbredd enligt bild 3 */
+  margin: 0 auto; /* Centrera innehållet horisontellt */
+  padding: 0; /* Ta bort padding */
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/headerbild.svg');
+  background-size: cover;
+  background-position: center;
+  height: 712px; /* Fast höjd enligt bild 3 */
+  position: relative;
+  overflow: hidden;
+}
+
 /* Styling för räknare och textdetaljer */
 .movies-count {
   color: white;
@@ -88,17 +101,30 @@ html, body {
 }
 
 .big-span {
-  font-size: 2rem;
-  font-weight: bold;
-  color: white; 
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  align-self: stretch;
+  text-align: center;
+  text-shadow: -2px -2px 3px var(--Sekundr, #024A88);
+  font-family: Impact;
+  font-size: 56px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%; /* 67.2px */
 }
 
 .text {
-  color: white;
-  max-width: 80%;
-  margin: 0 auto;
-  line-height: 1.5;
+  
+  max-width: 60%;
+  color: #FFF;
+  text-align: center;
+  /* Rubrik 3 */
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px; 
+  
 }
 
 /* ========== STATUS-INDIKATORER ========== */

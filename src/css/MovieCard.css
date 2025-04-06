@@ -76,21 +76,21 @@
     margin-bottom: 0.3rem;
   }
   
-  /* ==== Responsiv design för MovieCard ==== */
-@media (max-width: 600px) {
-  .movie-card {
-    width: 160px;
-  }
+  /* Responsiv design för mindre skärmar */
+  @media (max-width: 600px) {
+    .movie-card {
+      width: 160px;
+    }
+    
+    .movie-image-container {
+      height: 200px;
+    }
   
-  .movie-image-container {
-    height: 200px;
+    .movie-rating {
+      font-size: 1.3rem;
+    }
+  
+    .movie-title {
+      font-size: 0.9rem;
+    }
   }
-
-  .movie-rating {
-    font-size: 1.3rem;
-  }
-
-  .movie-title {
-    font-size: 0.9rem;
-  }
-}
