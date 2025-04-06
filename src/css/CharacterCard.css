@@ -77,18 +77,18 @@
     text-align: center;
   }
   
-  /* Responsiv design för mindre skärmar */
-  @media (max-width: 600px) {
-    .character-card {
-      width: 160px;
-    }
-    
-    .character-image-container {
-      width: 140px;
-      height: 140px;
-    }
-  
-    .character-name {
-      font-size: 1.2rem;
-    }
+/* ==== Responsiv design för CharacterCard ==== */
+@media (max-width: 600px) {
+  .character-card {
+    width: 160px;
   }
+  
+  .character-image-container {
+    width: 140px;
+    height: 140px;
+  }
+
+  .character-name {
+    font-size: 1.2rem;
+  }
+}

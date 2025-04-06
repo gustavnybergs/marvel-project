@@ -8,11 +8,18 @@ interface MovieDetailsProps {
   movie: Movie;
   onClose: () => void;
   onCharacterClick?: (character: MarvelCharacters) => void;
+  movies?: Movie[]; // Ny prop för att få tillgång till alla filmer
 }
 
-const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose, onCharacterClick }) => {
+const MovieDetails: React.FC<MovieDetailsProps> = ({ 
+  movie, 
+  onClose, 
+  onCharacterClick,
+  movies = [] // Default tom array
+}) => {
   const [characters, setCharacters] = useState<MarvelCharacters[]>([]);
   const [loading, setLoading] = useState(true);
+  const [trailerError, setTrailerError] = useState(false);
   
   // Hämta karaktärer när komponenten laddas
   useEffect(() => {
@@ -30,11 +37,39 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose, onCharacter
     getCharacters();
   }, []);
   
-  // Filtrera karaktärer som medverkar i den aktuella filmen
+  // Filtrera karaktärer som medverkar i den aktuella filmen med förbättrad matchningslogik
   const charactersInMovie = characters.filter(character => 
-    character.movies.some(movieTitle => 
-      movieTitle.includes(movie.title) || movie.title.includes(movieTitle.split(' (')[0])
-    )
+    character.movies.some(movieTitle => {
+      // Exakt matchning av filmtitel
+      if (movieTitle === movie.title) {
+        return true;
+      }
+      
+      // Hantera specialfall för titlar med parenteser (t.ex. cameos, post-credits)
+      if (movieTitle.includes('(') && movieTitle.split(' (')[0] === movie.title) {
+        return true;
+      }
+      
+      // Hantera särskilda fall där filmtiteln kan vara delvis annorlunda
+      // Till exempel: "Avengers: Infinity War" kan ibland anges som bara "Infinity War"
+      // Kontrollera att den kortare titeln inte matchar andra filmer
+      const movieParts = movie.title.split(': ');
+      if (movieParts.length > 1) {
+        const shortTitle = movieParts[1];
+        // Kontrollera att det är en substantiell del av titeln (undvik korta delar som "The")
+        if (shortTitle.length > 5 && movieTitle === shortTitle) {
+          // Kontrollera att detta inte skulle matcha andra filmer med samma suffix
+          const otherSimilarMovies = movies.filter(m => 
+            m.id !== movie.id && m.title.includes(shortTitle)
+          );
+          if (otherSimilarMovies.length === 0) {
+            return true;
+          }
+        }
+      }
+      
+      return false;
+    })
   );
   
   // Formatera releasedatum till läsbart format
@@ -104,6 +139,35 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose, onCharacter
     }
   };
 
+  // Hantera fel vid laddning av trailer
+  const handleTrailerError = () => {
+    setTrailerError(true);
+  };
+
+  // Kontrollera om trailer-url är en giltig YouTube-länk som kan inbäddas
+  const isValidYouTubeUrl = (url: string | null): boolean => {
+    if (!url) return false;
+    
+    // Kontrollera om det är en YouTube-länk som kan inbäddas
+    return url.includes('youtube.com') || url.includes('youtu.be');
+  };
+
+  // Konvertera YouTube-url till inbäddningslänk
+  const getEmbedUrl = (url: string): string => {
+    if (url.includes('youtube.com/watch?v=')) {
+      return url.replace('watch?v=', 'embed/');
+    } else if (url.includes('youtu.be/')) {
+      const videoId = url.split('youtu.be/')[1];
+      return `https://www.youtube.com/embed/${videoId}`;
+    } else if (url.includes('brightcove.net')) {
+      // Returnera länken som den är för Brightcove
+      return url;
+    }
+    
+    // Fallback - returnera ursprunglig länk
+    return url;
+  };
+
   // Fiktiva genres
   const genres = ['Sci-Fi', 'Superhero', 'Action', 'Adventure'];
 
@@ -159,14 +223,16 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose, onCharacter
 
         {/* Titel och metadata med integrerad betygssektion */}
         <header className="details-header">
-          <h2 id="movie-title">{movie.title}</h2>
-          
-          {/* Visa genomsnittsbetyget uppe till höger */}
-          {isMovieReleased(movie.release_date) && ratingValue && (
-            <div className="average-rating">
-              {ratingValue.toFixed(1)}/10
-            </div>
-          )}
+          <div className="title-rating-wrapper">
+            <h2 id="movie-title">{movie.title}</h2>
+            
+            {/* Visa genomsnittsbetyget */}
+            {isMovieReleased(movie.release_date) && ratingValue && (
+              <div className="average-rating">
+                {ratingValue.toFixed(1)}/10
+              </div>
+            )}
+          </div>
           
           <div className="movie-meta">
             <span className="movie-year">{getReleaseYear(movie.release_date)}</span>
@@ -182,8 +248,8 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose, onCharacter
 
           <div className="genre-tags">
             {movie.saga && (
-                <span className="phase-tag">{movie.saga}</span>
-              )}
+              <span className="phase-tag">{movie.saga}</span>
+            )}
           </div>
         </header>
 
@@ -231,18 +297,36 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose, onCharacter
           <p>{movie.overview || "Ingen beskrivning tillgänglig."}</p>
         </section>
 
-        {/* Trailer-sektion */}
+        {/* Trailer-sektion med fallback */}
         {movie.trailer_url && (
           <section className="trailer-section">
+            <div className="section-divider"></div>
             <h3 className="section-title">Trailer</h3>
-            <figure className="trailer-container">
-              <iframe
-                src={movie.trailer_url.replace('watch?v=', 'embed/')}
-                title={`${movie.title} trailer`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </figure>
+            
+            {!trailerError ? (
+              <figure className="trailer-container">
+                <iframe
+                  src={getEmbedUrl(movie.trailer_url)}
+                  title={`${movie.title} trailer`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  onError={handleTrailerError}
+                  onLoad={() => setTrailerError(false)}
+                ></iframe>
+              </figure>
+            ) : (
+              <div className="trailer-fallback">
+                <p>Trailern kunde inte laddas.</p>
+                <a 
+                  href={movie.trailer_url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="trailer-button"
+                >
+                  Öppna trailer i ny flik
+                </a>
+              </div>
+            )}
           </section>
         )}
         

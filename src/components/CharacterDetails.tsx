@@ -23,13 +23,58 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
 
   // Hämta filmer som karaktären medverkar i
   const getMoviesForCharacter = (characterMovies: string[], allMovies: Movie[]): Movie[] => {
-    // Filtrerar filmer som matchar namn i karaktärens movies-array
-    return allMovies.filter(movie => 
-      characterMovies.some(movieTitle => 
-        // Matcha även om filmtiteln innehåller extra text i parentes, t.ex. "(post-credits)"
-        movieTitle.includes(movie.title) || movie.title.includes(movieTitle.split(' (')[0])
-      )
-    );
+    // Skapa en hjälptabell för att snabbt hitta filmer med ID
+    const movieLookup = allMovies.reduce((lookup, movie) => {
+      lookup[movie.title] = movie;
+      return lookup;
+    }, {} as Record<string, Movie>);
+    
+    // Filtrerar filmer baserat på exakt matchning
+    return characterMovies
+      .map(movieTitle => {
+        // Exakt matchning
+        if (movieLookup[movieTitle]) {
+          return movieLookup[movieTitle];
+        }
+        
+        // Hantera specialfall för titlar med parenteser (t.ex. cameos, post-credits)
+        if (movieTitle.includes('(')) {
+          const baseTitle = movieTitle.split(' (')[0];
+          if (movieLookup[baseTitle]) {
+            return movieLookup[baseTitle];
+          }
+        }
+        
+        // Hantera fall där filmtitlar kan vara kortare (t.ex. "Infinity War" istället för "Avengers: Infinity War")
+        // men bara om det är unikt nog för att identifiera rätt film
+        for (const movie of allMovies) {
+          const movieParts = movie.title.split(': ');
+          if (movieParts.length > 1) {
+            const shortTitle = movieParts[1];
+            // Kontrollera att det är en substantiell del av titeln (undvik korta delar)
+            if (shortTitle.length > 5 && movieTitle === shortTitle) {
+              // Kontrollera att detta inte skulle matcha andra filmer med samma suffix
+              const otherSimilarMovies = allMovies.filter(m => 
+                m.id !== movie.id && m.title.includes(shortTitle)
+              );
+              if (otherSimilarMovies.length === 0) {
+                return movie;
+              }
+            }
+          }
+        }
+        
+        return null;
+      })
+      .filter((movie): movie is Movie => movie !== null)
+      .sort((a, b) => {
+        // Sortera filmerna efter kronologisk ordning om tillgängligt
+        if (a.chronology && b.chronology) {
+          return a.chronology - b.chronology;
+        }
+        // Fallback till sortering efter utgivningsdatum
+        return new Date(a.release_date).getTime() - new Date(b.release_date).getTime();
+      });
   };
   
   // Hämta filmerna för denna karaktär
@@ -68,16 +113,54 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
     e.stopPropagation();
   };
 
-  // Hantera klick på en film
-  const handleMovieCardClick = (movie: Movie) => (e: React.MouseEvent) => {
-    e.stopPropagation(); // Förhindra att modal stängs
-    if (onMovieClick) {
-      onMovieClick(movie);
-      onClose(); // Stäng karaktärsdetaljer när man öppnar filmdetaljer
-    }
+  // Beräkna genomsnittsbetyg för en film
+  const calculateAverageRating = (movie: Movie): number | null => {
+    const ratings = [
+      movie.imdb_rating,
+      movie.rt_rating ? movie.rt_rating / 10 : null,
+      movie.mc_rating ? movie.mc_rating / 10 : null
+    ].filter((rating): rating is number => rating !== null && rating !== undefined);
+    
+    if (ratings.length === 0) return null;
+    
+    return parseFloat((ratings.reduce((sum, rating) => sum + rating, 0) / ratings.length).toFixed(1));
   };
 
-  const characterTags = ['Avenger', 'Hero', 'Mutant', 'Warrior'];
+  // Dynamiskt generera taggar baserat på karaktären
+  const generateCharacterTags = (): string[] => {
+    const tags: string[] = [];
+    
+    // Baserat på filmer karaktären är med i
+    const isAvenger = character.movies.some(movie => 
+      movie.includes("Avengers") || movie.includes("Captain America: Civil War")
+    );
+    
+    if (isAvenger) tags.push('Avenger');
+    
+    // Baserat på karaktärens namn eller beskrivning
+    if (character.name.includes("Thor") || character.name.includes("Loki") || character.name.includes("Odin")) {
+      tags.push('Asgardian');
+    }
+    
+    if (character.name.includes("Groot") || character.name.includes("Rocket") || 
+        character.name.includes("Star-Lord") || character.name.includes("Gamora") ||
+        character.name.includes("Drax") || character.name.includes("Mantis") ||
+        character.name.includes("Nebula")) {
+      tags.push('Guardian');
+    }
+    
+    // Standardtaggar om inga specifika hittades
+    if (tags.length === 0) {
+      tags.push('Hero');
+      if (character.real_name !== character.name) {
+        tags.push('Superhero');
+      }
+    }
+    
+    return tags;
+  };
+
+  const characterTags = generateCharacterTags();
 
   return (
     <aside 
@@ -122,7 +205,7 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
           <h2 id="character-title">{character.name}</h2>
           
           <div className="character-meta">
-            {character.real_name && (
+            {character.real_name && character.real_name !== character.name && (
               <span className="character-real-name">{character.real_name}</span>
             )}
           </div>
@@ -143,36 +226,65 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
           </section>
         )}
 
-        {/* Filmer karaktären medverkar i - nu klickbara */}
+        {/* Filmer karaktären medverkar i */}
         {characterMovies.length > 0 && (
           <section className="movies-section">
             <div className="section-divider"></div>
             <h3 className="section-title">Medverkar i</h3>
             
             <div className="character-movies-grid">
-              {characterMovies.map((movie) => (
-                <div 
-                  key={movie.id} 
-                  className="character-movie-card"
-                  onClick={onMovieClick ? handleMovieCardClick(movie) : undefined}
-                  style={onMovieClick ? { cursor: 'pointer' } : {}}
-                >
-                  <div className="movie-poster-container">
-                    <img 
-                      src={movie.cover_url} 
-                      alt={`Poster för ${movie.title}`} 
-                      className="movie-poster"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = '/headerbild.svg';
-                      }}
-                    />
-                  </div>
-                  <h4 className="movie-title">{movie.title}</h4>
-                  <p className="movie-year">
-                    {new Date(movie.release_date).getFullYear()}
-                  </p>
-                </div>
-              ))}
+              {characterMovies.map((movie) => {
+                // Beräkna genomsnittsbetyg för filmen
+                const validRatings = [
+                  movie.imdb_rating,
+                  movie.rt_rating ? movie.rt_rating / 10 : null,
+                  movie.mc_rating ? movie.mc_rating / 10 : null
+                ].filter((r): r is number => r !== null && r !== undefined);
+                
+                const ratingValue = validRatings.length > 0
+                  ? parseFloat((validRatings.reduce((sum, r) => sum + r, 0) / validRatings.length).toFixed(1))
+                  : null;
+                
+                // Kontrollera om filmen har släppts
+                const isReleased = new Date(movie.release_date) <= new Date();
+                
+                // Korrigera bildsökvägen om den börjar med "public/"
+                const getImagePath = (path: string | undefined): string => {
+                  if (!path) return '/headerbild.svg';
+                  return path.replace('public/', '');
+                };
+                
+                return (
+                  <article 
+                    key={movie.id} 
+                    className="movie-card"
+                    onClick={onMovieClick ? () => onMovieClick(movie) : undefined}
+                  >
+                    <div className="movie-image-container">
+                      <img 
+                        src={getImagePath(movie.cover_url)} 
+                        alt={`Filmposter för ${movie.title}`}
+                        className="movie-image"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = '/headerbild.svg';
+                        }}
+                      />
+                    </div>
+                    
+                    <section className="movie-info">
+                      {isReleased ? (
+                        <div className="movie-rating">
+                          {ratingValue !== null ? ratingValue.toFixed(1) : "N/A"}
+                        </div>
+                      ) : (
+                        <span className="coming-soon-card">Coming soon...</span>
+                      )}
+                      
+                      <h2 className="movie-title">{movie.title}</h2>
+                    </section>
+                  </article>
+                );
+              })}
             </div>
           </section>
         )}

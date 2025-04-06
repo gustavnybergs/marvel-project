@@ -144,6 +144,7 @@ const CharactersPage: React.FC = () => {
       {selectedMovie && (
         <MovieDetails
           movie={selectedMovie}
+          movies={movies} // Skickar med movies-array för förbättrad matchning
           onClose={handleCloseMovieDetails}
           onCharacterClick={handleCharacterClick}
         />

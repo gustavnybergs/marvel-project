@@ -112,24 +112,24 @@ font-size: 0.9rem;
 margin-top: 2rem;
 }
 
-/* Responsive adjustments */
+/* ==== Responsiv design för CharactersPage ==== */
 @media (max-width: 768px) {
-.characters-hero h1 {
-    font-size: 2rem;
-}
-
-.characters-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
-}
-}
-
-@media (max-width: 480px) {
-.characters-hero {
-    padding: 3rem 1rem;
-}
-
-.characters-hero h1 {
-    font-size: 1.8rem;
-}
-}
+    .characters-hero h1 {
+      font-size: 2rem;
+    }
+  
+    .characters-grid {
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .characters-hero {
+      padding: 3rem 1rem;
+    }
+  
+    .characters-hero h1 {
+      font-size: 1.8rem;
+    }
+  }
