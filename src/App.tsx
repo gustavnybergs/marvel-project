@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { fetchMarvelMovies } from "./services/api";
+import { fetchMarvelCharacters } from "./services/characterApi";
 import { Movie } from "./types/movie";
+import { MarvelCharacters } from "./types/character";
 import MovieCard from "./components/MovieCard";
 import MovieDetails from "./components/MovieDetails";
+import CharacterDetails from "./components/CharacterDetails";
 import SearchFilter from "./components/SearchFilter";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import NavBar from "./components/NavBar";
@@ -20,6 +23,7 @@ function App() {
   const [selectedRating, setSelectedRating] = useState<number | null>(null);
   const [sortBy, setSortBy] = useState<string>("chronology");
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [selectedCharacter, setSelectedCharacter] = useState<MarvelCharacters | null>(null);
 
   useEffect(() => {
     const getMovies = async () => {
@@ -53,10 +57,20 @@ function App() {
 
   const handleMovieClick = (movie: Movie) => {
     setSelectedMovie(movie);
+    setSelectedCharacter(null); // Stäng karaktärsdetaljerna om öppna
+  };
+
+  const handleCharacterClick = (character: MarvelCharacters) => {
+    setSelectedCharacter(character);
+    setSelectedMovie(null); // Stäng filmdetaljerna
   };
 
   const handleCloseDetails = () => {
     setSelectedMovie(null);
+  };
+  
+  const handleCloseCharacterDetails = () => {
+    setSelectedCharacter(null);
   };
 
   // Beräkna genomsnittsbetyg
@@ -191,6 +205,16 @@ function App() {
                 <MovieDetails
                   movie={selectedMovie}
                   onClose={handleCloseDetails}
+                  onCharacterClick={handleCharacterClick}
+                />
+              )}
+              
+              {selectedCharacter && (
+                <CharacterDetails
+                  character={selectedCharacter}
+                  onClose={handleCloseCharacterDetails}
+                  movies={movies}
+                  onMovieClick={handleMovieClick}
                 />
               )}
 

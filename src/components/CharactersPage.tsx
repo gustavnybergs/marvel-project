@@ -64,10 +64,12 @@ const CharactersPage: React.FC = () => {
 
   const handleCharacterClick = (character: MarvelCharacters) => {
     setSelectedCharacter(character);
+    setSelectedMovie(null); // Stäng filmdetaljer om öppna
   };
 
   const handleMovieClick = (movie: Movie) => {
     setSelectedMovie(movie);
+    setSelectedCharacter(null); // Stäng karaktärsdetaljer
   };
 
   const handleCloseCharacterDetails = () => {
@@ -143,6 +145,7 @@ const CharactersPage: React.FC = () => {
         <MovieDetails
           movie={selectedMovie}
           onClose={handleCloseMovieDetails}
+          onCharacterClick={handleCharacterClick}
         />
       )}
 

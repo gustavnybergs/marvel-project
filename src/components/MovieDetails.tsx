@@ -1,8 +1,42 @@
-import React, { useEffect, useRef } from 'react';
-import { Movie, MovieDetailsProps } from '../types/movie';
+import React, { useEffect, useRef, useState } from 'react';
+import { Movie } from '../types/movie';
+import { MarvelCharacters } from '../types/character';
 import '../css/MovieDetails.css';
+import { fetchMarvelCharacters } from '../services/characterApi';
 
-const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
+interface MovieDetailsProps {
+  movie: Movie;
+  onClose: () => void;
+  onCharacterClick?: (character: MarvelCharacters) => void;
+}
+
+const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose, onCharacterClick }) => {
+  const [characters, setCharacters] = useState<MarvelCharacters[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+  // Hämta karaktärer när komponenten laddas
+  useEffect(() => {
+    const getCharacters = async () => {
+      try {
+        const allCharacters = await fetchMarvelCharacters();
+        setCharacters(allCharacters);
+      } catch (error) {
+        console.error('Fel vid hämtning av karaktärer:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    getCharacters();
+  }, []);
+  
+  // Filtrera karaktärer som medverkar i den aktuella filmen
+  const charactersInMovie = characters.filter(character => 
+    character.movies.some(movieTitle => 
+      movieTitle.includes(movie.title) || movie.title.includes(movieTitle.split(' (')[0])
+    )
+  );
+  
   // Formatera releasedatum till läsbart format
   const formatDate = (dateString: string) => {
     const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -59,6 +93,15 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
 
   const handleModalClick = (e: React.MouseEvent) => {
     e.stopPropagation();
+  };
+  
+  // Hantera klick på en karaktär
+  const handleCharacterCardClick = (character: MarvelCharacters) => (e: React.MouseEvent) => {
+    e.stopPropagation(); // Förhindra att modal stängs
+    if (onCharacterClick) {
+      onCharacterClick(character);
+      onClose(); // Stäng filmdetaljer när man öppnar karaktärsdetaljer
+    }
   };
 
   // Fiktiva genres
@@ -200,6 +243,40 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ movie, onClose }) => {
                 allowFullScreen
               ></iframe>
             </figure>
+          </section>
+        )}
+        
+        {/* Karaktärssektion */}
+        {!loading && charactersInMovie.length > 0 && (
+          <section className="characters-section">
+            <div className="section-divider"></div>
+            <h3 className="section-title">Karaktärer i filmen</h3>
+            
+            <div className="movie-characters-grid">
+              {charactersInMovie.map((character) => (
+                <div 
+                  key={character.id} 
+                  className="movie-character-card"
+                  onClick={onCharacterClick ? handleCharacterCardClick(character) : undefined}
+                  style={onCharacterClick ? { cursor: 'pointer' } : {}}
+                >
+                  <div className="character-avatar-container">
+                    <img 
+                      src={character.image_url} 
+                      alt={character.name} 
+                      className="character-avatar"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/placeholder-character.jpg';
+                      }}
+                    />
+                  </div>
+                  <h4 className="character-name">{character.name}</h4>
+                  {character.real_name !== character.name && (
+                    <p className="character-real-name">{character.real_name}</p>
+                  )}
+                </div>
+              ))}
+            </div>
           </section>
         )}
       </article>

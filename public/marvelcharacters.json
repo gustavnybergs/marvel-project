@@ -4,7 +4,7 @@
     "name": "Ant-Man",
     "real_name": "Scott Lang",
     "description": "Avengers Vol 1 #181 (March, 1979)",
-    "image_url": "/images/ant-man.png",
+    "image_url": "/images/ant-man.svg",
     "movies": ["Ant-Man", "Captain America: Civil War", "Ant-Man and the Wasp", "Avengers: Endgame", "Ant-Man and the Wasp: Quantumania"]
   },
   {
@@ -20,7 +20,7 @@
     "name": "Black Widow",
     "real_name": "Natasha Romanoff",
     "description": "Tales of Suspense #52",
-    "image_url": "/images/black-widow.png",
+    "image_url": "/images/black-widow.svg",
     "movies": ["Iron Man 2", "The Avengers", "Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame", "Black Widow"]
   },
   {
@@ -36,7 +36,7 @@
     "name": "Captain America",
     "real_name": "Steve Rogers",
     "description": "Captain America Comics #1 (March 1941)",
-    "image_url": "/images/captain-america.png",
+    "image_url": "/images/captain-america.svg",
     "movies": ["Captain America: The First Avenger", "The Avengers", "Captain America: The Winter Soldier", "Avengers: Age of Ultron", "Captain America: Civil War", "Avengers: Infinity War", "Avengers: Endgame"]
   },
   {

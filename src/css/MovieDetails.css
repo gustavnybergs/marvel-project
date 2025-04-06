@@ -315,6 +315,84 @@ text-align: center;
 margin-right: 10px;
 }
 
+
+/* KARAKTÄRSSEKTION I MODALEN  */
+.characters-section {
+    margin: 0 0 1.5rem 0;
+    padding: 0 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .movie-characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .movie-character-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .movie-character-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .character-avatar-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .character-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .movie-character-card .character-name {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    text-align: center;
+    font-weight: bold;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: white;
+  }
+  
+  .movie-character-card .character-real-name {
+    font-size: 0.8rem;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0.1rem 0 0 0;
+    font-style: italic;
+  }
+  
+  /* Responsiv anpassning för karaktärer */
+  @media (max-width: 640px) {
+    .movie-characters-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.8rem;
+    }
+    
+    .character-avatar-container {
+      width: 80px;
+      height: 80px;
+    }
+    
+    .movie-character-card .character-name {
+      font-size: 0.8rem;
+    }
+  }
+
 /* Responsiv design för små skärmar */
 
 @media (max-width: 640px) {

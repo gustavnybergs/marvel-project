@@ -757,7 +757,7 @@
   },
   {
     "id": 34,
-    "title": "Captain America: Brave New Order",
+    "title": "Captain America: Brave New World",
     "release_date": "2025-02-14",
     "box_office": "348203484",
     "duration": 118,
@@ -771,9 +771,9 @@
     "post_credit_scenes": 1,
     "imdb_id": "tt14513804",
     "updated_at": "2025-03-08T20:07:42.479Z",
-    "imdb_rating": null,
-    "rt_rating": null,
-    "mc_rating": null
+    "imdb_rating": 5.9,
+    "rt_rating": 48,
+    "mc_rating": 42
   },
   {
     "id": 39,
