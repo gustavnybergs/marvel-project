@@ -760,6 +760,26 @@
     "mc_rating": null
   },
   {
+    "id": 34,
+    "title": "Captain America: Brave New World",
+    "release_date": "2025-02-14",
+    "box_office": "348203484",
+    "duration": 118,
+    "overview": "Anthony Mackie returns as the high-flying hero Sam Wilson, who’s officially taken up the mantle of Captain America. After meeting with newly elected U.S. President Thaddeus Ross, Sam finds himself in the middle of an international incident. He must discover the reason behind a nefarious global plot before the true mastermind has the entire world seeing red.",
+    "cover_url": "/images/posters/c-a-brave-new-order.jpg",
+    "trailer_url": "https://youtu.be/O_A8HdCDaWM",
+    "directed_by": "Julius Onah",
+    "phase": 5,
+    "saga": "Multiverse Saga",
+    "chronology": 34,
+    "post_credit_scenes": 1,
+    "imdb_id": "tt14513804",
+    "updated_at": "2025-03-08T20:07:42.479Z",
+    "imdb_rating": 5.9,
+    "rt_rating": 48,
+    "mc_rating": 42
+  },
+  {
     "id": 39,
     "title": "Avengers: Doomsday",
     "release_date": "2026-05-01",

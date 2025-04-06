@@ -21,9 +21,19 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
   
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Här kan vi filtrera filmerna som karaktären medverkar i
-  // Notera: Detta är en placeholder - du behöver implementera din egen logik baserat på din datastruktur
-  const characterMovies = movies.slice(0, 4); // Tillfällig lösning: Visar bara några filmer
+  // Hämta filmer som karaktären medverkar i
+  const getMoviesForCharacter = (characterMovies: string[], allMovies: Movie[]): Movie[] => {
+    // Filtrerar filmer som matchar namn i karaktärens movies-array
+    return allMovies.filter(movie => 
+      characterMovies.some(movieTitle => 
+        // Matcha även om filmtiteln innehåller extra text i parentes, t.ex. "(post-credits)"
+        movieTitle.includes(movie.title) || movie.title.includes(movieTitle.split(' (')[0])
+      )
+    );
+  };
+  
+  // Hämta filmerna för denna karaktär
+  const characterMovies = getMoviesForCharacter(character.movies, movies);
   
   useEffect(() => {
     // Förhindra scrollning på sidan när detaljvyn är öppen
@@ -158,6 +168,9 @@ const CharacterDetails: React.FC<CharacterDetailsProps> = ({
                     />
                   </div>
                   <h4 className="movie-title">{movie.title}</h4>
+                  <p className="movie-year">
+                    {new Date(movie.release_date).getFullYear()}
+                  </p>
                 </div>
               ))}
             </div>
