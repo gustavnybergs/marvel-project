@@ -117,6 +117,18 @@ function App() {
     }
   });
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 512);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 512);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+
   // Hämta unika faser
   const phases = [...new Set(movies.map(movie => movie.phase))].sort();
 
@@ -179,7 +191,7 @@ function App() {
                 )}
 
                 {!loading && !error && (
-                  <section className="movies-section">
+                  <section className="movies-section" style={{ marginTop: isMobile ? '100px' : '0' }}>
                     <output className="movies-count" aria-live="polite">
                       Visar {sortedMovies.length} av {movies.length} filmer
                     </output>
