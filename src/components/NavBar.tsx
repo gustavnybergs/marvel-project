@@ -1,58 +1,91 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "../css/Navbar.css"; // Kontrollera att sökvägen är korrekt
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navRef = useRef<HTMLDivElement>(null);
 
-  // Stäng menyn när man navigerar eller ändrar storlek på skärmen
+  // Stäng menyn när man navigerar
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
 
-  // Hantera responsivitet
+  // Hantera klick utanför menyn och anpassa för skärmstorlek
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth > 768) {
+      if (window.innerWidth > 768 && isMenuOpen) {
         setIsMenuOpen(false);
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        isMenuOpen && 
+        navRef.current && 
+        !navRef.current.contains(event.target as Node) &&
+        window.innerWidth <= 768
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    // Lås scroll när menyn är öppen på mobil
+    if (isMenuOpen && window.innerWidth <= 768) {
+      document.body.classList.add('scroll-lock');
+    } else {
+      document.body.classList.remove('scroll-lock');
+    }
+
+    window.addEventListener("resize", handleResize);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.classList.remove('scroll-lock');
+    };
+  }, [isMenuOpen]);
+
+  // Toggle-funktion för hamburgarmenyn
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <nav className="navbar">
-      {/* Logotyp till vänster */}
+    <nav className="navbar" ref={navRef}>
+      {/* Logotyp */}
       <div className="navbar-logo">
         <Link to="/">
           <img src="/logo.png" alt="Marvelous Ratings Logo" />
         </Link>
       </div>
 
-      {/* Hamburgermeny för mobila enheter */}
+      {/* Hamburgermeny för mobil */}
       <div 
-        className={`menu-toggle ${isMenuOpen ? 'active' : ''}`} 
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        className={`menu-toggle ${isMenuOpen ? "active" : ""}`} 
+        onClick={toggleMenu}
         aria-label={isMenuOpen ? "Stäng meny" : "Öppna meny"}
         role="button"
         tabIndex={0}
+        aria-expanded={isMenuOpen}
       >
         <span></span>
         <span></span>
         <span></span>
       </div>
 
-      {/* Container för navigationslänkar */}
-      <div className={`nav-links-container ${isMenuOpen ? 'open' : ''}`}>
+      {/* Navigation container med länkar */}
+      <div 
+        className={`nav-links-container ${isMenuOpen ? "open" : ""}`}
+        aria-hidden={!isMenuOpen}
+      >
         <ul className="nav-links">
           <li>
             <Link 
               to="/" 
-              className={location.pathname === '/' ? 'active' : ''}
-              onClick={() => setIsMenuOpen(false)}
+              className={location.pathname === "/" ? "active" : ""}
             >
               Hem
             </Link>
@@ -60,8 +93,7 @@ const Navbar: React.FC = () => {
           <li>
             <Link 
               to="/marvel-historia" 
-              className={location.pathname === '/marvel-historia' ? 'active' : ''}
-              onClick={() => setIsMenuOpen(false)}
+              className={location.pathname === "/marvel-historia" ? "active" : ""}
             >
               Marvel Historia
             </Link>
@@ -69,8 +101,7 @@ const Navbar: React.FC = () => {
           <li>
             <Link 
               to="/characters" 
-              className={location.pathname === '/characters' ? 'active' : ''}
-              onClick={() => setIsMenuOpen(false)}
+              className={location.pathname === "/characters" ? "active" : ""}
             >
               Marvel Karaktärer
             </Link>

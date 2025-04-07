@@ -1,151 +1,121 @@
 /* =================================================
-   NAVBAR.CSS - Styling för navigationsfältet
+   NAVBAR.CSS - Genomskinlig design med scrollspärr
    ================================================= */
 
-/* === MAIN NAVBAR CONTAINER ===
-   Huvudbehållaren för navigeringsfältet.
-   Använder glasliknande design med genomskinlighet.
-   Position: fixed gör att den alltid syns högst upp på sidan.
-   z-index: 999 säkerställer att den visas ovanpå allt annat innehåll.
-*/
+/* Reset för navigeringsfältet */
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  z-index: 100;
-  box-sizing: border-box;
-  overflow-x: hidden;
-  display: flex;
   width: 100%;
-  height: 99px;
-  padding: 0px 72px;
-  flex-shrink: 0;
+  z-index: 1000;
+  /* Här återställer vi den ursprungliga bakgrunden utan skugga för genomskinlighet */
   background: linear-gradient(180deg, rgba(7, 30, 59, 0.78) 0%, rgba(11, 15, 52, 0.00) 100%);
-
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 72px;
+  height: 99px;
+  box-sizing: border-box;
 }
 
-
-/* === LOGO STYLING ===
-   Styling för logotypbilden i navigeringsfältet.
-   Sätter fast höjd på logotypen.
-*/
-.navbar-logo img {
-  height: 40px;
-}
-
-/* === LOGO CONTAINER ===
-   Container för logotypen.
-*/
+/* Logo styling */
 .navbar-logo {
   display: flex;
   align-items: center;
 }
 
-/* === NAVIGATION LINKS CONTAINER ===
-   Container för navigationslänkarna.
-   Placeras helt till höger i navbar.
-*/
-.nav-links-container {
-  margin-left: auto; /* Viktigt: flyttar hela container till höger */
-  display: flex;
+.navbar-logo img {
+  height: 40px;
 }
 
-/* === NAVIGATION LINKS LIST ===
-   Styling för listan av navigationslänkar.
-   Tar bort standard punktmarkering och lägger länkarna horisontellt.
-*/
-.nav-links {
-  list-style: none;
+/* Desktop menu styling */
+.nav-links-container {
   display: flex;
-  align-items: center;
+  margin-left: auto; /* Flytta länkarna till höger */
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
-/* === NAVIGATION ITEM ===
-   Styling för varje enskild navigationslänk-behållare (li-element).
-   Lägger till marginaler mellan länkarna.
-*/
 .nav-links li {
-  margin-left: 15px; /* Ökat avstånd mellan länkar för bättre läsbarhet */
+  margin-left: 24px;
 }
 
-/* === NAVIGATION LINK STYLING ===
-   Grundstyling för alla navigationslänkar.
-   Sätter färg, storlek, vikt och tar bort understrykning.
-   Lägger till mjuk övergång vid hover-effekt.
-*/
 .nav-links a {
   color: white;
+  text-decoration: none;
   font-size: 18px;
   font-weight: 500;
-  text-decoration: none;
   padding: 5px 0;
-  transition: color 0.3s ease;
+  position: relative;
+  transition: color 0.3s;
   white-space: nowrap; /* Förhindrar rad-brytning */
 }
 
-/* === HOVER EFFECT ===
-   Styling för länkarna när man hovrar över dem.
-   Ändrar färg för att visa interaktivitet.
-*/
 .nav-links a:hover {
   color: #1E90FF;
 }
 
-/* === ACTIVE LINK STYLING ===
-   Styling för den aktiva/valda länken.
-   Gör texten fetstil för att markera den aktiva sidan.
-*/
 .nav-links a.active {
-  font-weight: bold;
-  position: relative; /* För positionering av understreck */
+  font-weight: 700;
 }
 
-/* === ACTIVE LINK UNDERLINE ===
-   Lägger till ett understreck under den aktiva länken.
-   content: "" skapar ett tomt element som fungerar som understreck.
-*/
 .nav-links a.active::after {
   content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: white;
   position: absolute;
   bottom: -4px;
   left: 0;
-  transition: width 0.3s ease;
+  width: 100%;
+  height: 2px;
+  background-color: white;
 }
 
-/* === HAMBURGER MENU BUTTON ===
-   Knapp för hamburgermenyn på mindre skärmar.
-   Är normalt dold på större skärmar (display: none).
-*/
+/* Hamburger menu button */
 .menu-toggle {
-  display: none; /* Dölj på stora skärmar */
-  flex-direction: column;
-  gap: 4px;
+  display: none;
   cursor: pointer;
-  margin-left: auto; /* Placera hamburgermenyn till höger */
-  z-index: 1000; /* Säkerställ att den syns ovanför allt */
+  z-index: 1010;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  margin-left: auto; /* Placera till höger */
 }
 
-/* === HAMBURGER MENU LINES ===
-   Styling för strecken i hamburgermenyn.
-*/
 .menu-toggle span {
   display: block;
-  width: 25px;
+  position: absolute;
   height: 3px;
-  background-color: white;
-  transition: all 0.3s;
+  width: 100%;
+  background: white;
+  border-radius: 3px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
 }
 
-/* Styling för hamburgermenyn när den är aktiv/öppen */
+.menu-toggle span:nth-child(1) {
+  top: 4px;
+}
+
+.menu-toggle span:nth-child(2) {
+  top: 14px;
+}
+
+.menu-toggle span:nth-child(3) {
+  top: 24px;
+}
+
 .menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(5px, 5px);
+  top: 14px;
+  transform: rotate(45deg);
 }
 
 .menu-toggle.active span:nth-child(2) {
@@ -153,72 +123,83 @@
 }
 
 .menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(5px, -5px);
+  top: 14px;
+  transform: rotate(-45deg);
 }
 
-/* =================================================
-   RESPONSIV DESIGN - Mobilanpassning
-   ================================================= */
+/* Klass för att låsa scrollning */
+.scroll-lock {
+  overflow: hidden !important;
+  height: 100% !important;
+}
 
-/* === MOBILE VIEW STYLING ===
-   Omformaterar navigeringen för små skärmar (mindre än 768px bredd).
-   Visar hamburgermenyn och döljer länkarna tills hamburgermenyn klickas.
-*/
+/* Mobile view */
 @media (max-width: 768px) {
-  /* Justera navbarens utseende på små skärmar */
   .navbar {
-    height: 60px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    height: 70px;
+    padding: 0 20px;
+    /* Behåll en viss bakgrund för läsbarhet på mobil */
+    background: linear-gradient(180deg, rgba(7, 30, 59, 0.78) 0%, rgba(11, 15, 52, 0.50) 100%);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
   }
 
-  /* Visa hamburgermenyn */
   .menu-toggle {
-    display: flex;
+    display: block;
   }
-  
-  /* Dölj länkbehållaren som standard */
+
   .nav-links-container {
-    position: absolute;
-    top: 60px;
+    position: fixed;
+    top: 70px;
     left: 0;
     right: 0;
-    background: rgba(15, 23, 42, 0.9);
+    /* Genomskinlig bakgrund för mobil-menyn */
+    background-color: rgba(7, 30, 59, 0.85);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    height: 0;
+    overflow: hidden;
+    transition: height 0.5s ease;
     width: 100%;
-    flex-direction: column;
-    align-items: center;
-    transform: translateY(-150%); /* Helt dolda utanför skärmen */
-    transition: transform 0.3s ease;
-    z-index: 999;
+    display: block;
   }
-  
-  /* Visa menyn när den är öppen */
+
+  /* Detta är kritiskt - att vi använder height istället för transform */
   .nav-links-container.open {
-    transform: translateY(0);
-    display: flex;
+    height: auto;
+    min-height: 200px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
-  
-  /* Stapla länkarna vertikalt i mobilvy */
+
   .nav-links {
     flex-direction: column;
-    align-items: center;
-    gap: 15px;
     width: 100%;
-    padding: 15px 0;
+    padding: 20px 0;
+    display: flex;
+    opacity: 0;
+    transition: opacity 0.3s ease;
   }
-  
-  /* Fullbredd för varje länk i mobilvy */
+
+  .nav-links-container.open .nav-links {
+    opacity: 1;
+  }
+
   .nav-links li {
+    margin: 0;
     width: 100%;
     text-align: center;
-    margin-left: 0; /* Ta bort margin i mobilvy för li */
-  }
-  
-  /* Större träffyta för länkar i mobilvy */
-  .nav-links a {
-    font-size: 18px;
-    display: block;
-    width: 100%;
     padding: 15px 0;
+  }
+
+  .nav-links a {
+    display: block;
+    font-size: 20px;
+    padding: 10px 0;
+  }
+
+  .nav-links a.active::after {
+    bottom: 0;
   }
 }
