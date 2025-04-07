@@ -244,18 +244,6 @@
   }
   
   /* Responsiva justeringar */
-  @media (max-width: 768px) {
-    .clear-button {
-      right: 10px;
-      font-size: 18px;
-    }
-  
-    .compact-search-input {
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-  }
-  
   @media (max-width: 480px) {
     .clear-button {
       font-size: 24px;
@@ -265,5 +253,93 @@
     .compact-search-input {
       padding-left: 15px;
       padding-right: 15px;
+    }
+  }
+
+  @media (max-width: 512px) {
+    .compact-search-input {
+      display: none;
+      transition: all 0.3s ease;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+  
+    .compact-search-input.active {
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      margin-top: 10px;
+    }
+  
+    .search-icon {
+      cursor: pointer;
+      margin-left: 10px;
+      width: 30px;
+      height: 30px;
+    }
+  }
+  @media (max-width: 512px) {
+    .compact-filter-buttons {
+      display: flex;
+      align-items: center;
+    }
+  
+    .compact-filter-button {
+      background: none;
+      border: none;
+      padding: 0;
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  
+    .compact-filter-button span {
+      display: none; /* Dölj text */
+    }
+  
+    .compact-filter-button svg {
+      width: 24px;
+      height: 24px;
+      color: white;
+    }
+  
+    .compact-filter-button.active svg {
+      color: #e62429; /* Marvel-röd färg för aktiv knapp */
+    }
+  }
+
+  @media (max-width: 512px) {
+    .compact-search-input {
+      display: none;
+      transition: all 0.3s ease;
+      padding-left: 20px;
+      padding-right: 20px;
+      text-overflow: clip; /* Klipp av texten */
+      white-space: nowrap; /* Förhindra radbrytning */
+      overflow: hidden; 
+      text-indent: -9999px; /* Skjut ut texten utanför visningsområdet */
+      width: 0; /* Minska bredden till 0 */
+    padding: 0;
+    
+    }
+
+    .compact-search-input::placeholder {
+      color: transparent; /* Göm placeholder */
+    }
+  
+    .compact-search-input.active {
+      display: block;
+      width: calc(100% - 200px); /* Anpassad bredd */
+      height: 40px;
+      margin-right: 10px;
+      border-radius: 20px;
+      padding: 0 15px;
+      background-color: rgba(255,255,255,0.1);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.2);
     }
   }

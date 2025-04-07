@@ -490,15 +490,17 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
     /* Mindre padding för att utnyttja utrymmet bättre */
-    .movies-section, 
+     
     .characters-section, 
     .about-movie-section, 
     .about-character-section,
     .ratings-section,
     .trailer-section {
       padding: 0 0.75rem;
-      margin-bottom: 1rem;
+      
     }
+
+    
     
     /* Mindre sektionsmarginaler */
     .section-divider {

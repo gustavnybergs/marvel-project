@@ -129,7 +129,7 @@ function App() {
           path="/"
           element={
             <div className="app-container">
-              <header className="main-header">
+              <header className="characters-hero">
                 <p className="text">
                   <span className="big-span">Marvelous RATINGS <br /></span>
                   Välkommen till Marvelous Ratings - din ultimata guide till Marvel-filmer!<br />
